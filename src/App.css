@@ -2,21 +2,135 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-}
-
-.App-header {
-  background-color: #282c34;
+.editCtnr {
+  background-color: #90b1f7;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: rgb(45, 61, 71);
 }
 
-.App-link {
-  color: #09d3ac;
+.editCtnr > * {
+  padding: 10px;
+}
+
+.controlCtnr {
+  background-color: #3b5a9e;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 10%;
+  font-size: calc(10px + 2vmin);
+  color: rgb(45, 61, 71);
+  width: 100%;
+}
+
+.cmdCtnr {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 50%;
+  background-color: lightgray;
+  border: 1px solid gray;
+  border-radius: 10px;
+  width: 70%
+}
+
+.gridSizeCtnr {
+  display: flex;
+  justify-content: center;
+  flex: 3 1 60%;
+  margin-left: 100px;
+}
+
+.gridSizeLabel {
+  flex: 1 1 50%;
+  text-align: right;
+}
+
+.gridSizeInput {
+  flex: 1 1 50%;
+  margin-left: 10px;
+}
+
+.runBtnCtnr {
+  display: flex;
+  justify-content: left;
+  flex: 2 1 40%;
+  margin: 0 20px;
+}
+
+.runBtn {
+  background-color: #6fc481;
+  border: 1px solid #123b1b;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: calc(10px + 2vmin);
+}
+
+.paletteCtnr {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 50%;
+  background-color: lightgray;
+  border: 1px solid gray;
+  border-radius: 10px;
+  margin: 20px 0 10px 0;
+}
+
+.pokeTileCtnr {
+  position: relative;
+  height: 40px;
+  width: 40px;
+  background-color: lightgray;
+  margin: 0 10px;
+}
+
+.pokeTileCtnr.selected {
+  background-color: rgb(79, 182, 216);
+}
+
+.pokeTile {
+  position: relative;
+  top: 4px;
+  left: 4px;
+  height: 32px;
+}
+
+.gridCtnr {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex: 9 1 90%;
+  background-color: #aed1f3;
+  width: 100%;
+}
+
+.grid {
+  position: relative;
+}
+
+.gridRow {
+  background-color: green;
+  height: 32px;
+}
+
+.gridElt {
+  display: inline-block;
+  height: 32px;
+  width: 32px;
+  background-color: red;
+  border: 1px solid black;
+}
+
+.bulbasaurTile {
+  position: absolute;
 }
