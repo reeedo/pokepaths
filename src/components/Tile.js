@@ -4,7 +4,6 @@ import { INVALID_LOC, TILE_TYPES } from '../enums';
 import { images } from '../utils/images';
 
 const Tile = ({ type, cls, style, row, col, onTileClicked }) => {
-  const ckey = `r_${row}_c_${col}`;  // `
   const onClick = (e) => {
     const r = e.target.getAttribute('row') || INVALID_LOC;
     const c = e.target.getAttribute('col') || INVALID_LOC;
@@ -32,10 +31,7 @@ const Tile = ({ type, cls, style, row, col, onTileClicked }) => {
   }
   // normal grid tile
   return (
-    <div
-      className="gridElt"
-      key={ckey}
-    >
+    <div className="gridElt">
       {imgComponent}
     </div>
   );

@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { TILE_TYPES, TILE_SZ, INVALID_LOC } from '../enums';
-import { renderTile } from '../utils/images';
 import Tile from './Tile';
 
 const { FREE, BLOCKED, START, END } = TILE_TYPES;
@@ -36,8 +35,9 @@ const renderRow = (row, rix, onTileClicked) => {
     if (type === START) {
       type = FREE;
     }
+    const ckey = `${rkey}_c_${col}`;
     return (
-      <Tile type={type} row={rix} col={col} onTileClicked={onTileClicked} />
+      <Tile type={type} key={ckey} ow={rix} col={col} onTileClicked={onTileClicked} />
     );
   });
   return (
