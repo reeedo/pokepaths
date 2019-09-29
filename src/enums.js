@@ -6,12 +6,14 @@ const TILE_TYPES = {
 };
 
 const NO_TILE = 'none';
-const TILE_SZ = 34;
+const TILE_H = 32;
+const TILE_W = 34;
 const INVALID_LOC = -1;
 
 export {
   TILE_TYPES,
   NO_TILE,
-  TILE_SZ,
+  TILE_H,
+  TILE_W,
   INVALID_LOC
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { TILE_TYPES, TILE_SZ, INVALID_LOC } from '../enums';
+import { TILE_TYPES, TILE_H, TILE_W, INVALID_LOC } from '../enums';
 import Tile from './Tile';
 
 const { FREE, BLOCKED, START, END } = TILE_TYPES;
@@ -31,13 +31,13 @@ export const gridFromData = pokeData => {
 const renderRow = (row, rix, onTileClicked) => {
   const rkey = `r_${rix}`;  // `
   const cols = row.map((type, col) => {
-    // for grid rendering, we use FREE in place of START
-    if (type === START) {
+    // for grid rendering, we use FREE in place of START or END
+    if (type === START || type === END) {
       type = FREE;
     }
     const ckey = `${rkey}_c_${col}`;
     return (
-      <Tile type={type} key={ckey} ow={rix} col={col} onTileClicked={onTileClicked} />
+      <Tile type={type} key={ckey} row={rix} col={col} onTileClicked={onTileClicked} />
     );
   });
   return (
@@ -45,27 +45,45 @@ const renderRow = (row, rix, onTileClicked) => {
   );
 };
 
-const renderBulbasaur = (loc) => {
+const renderBulbasaur = (loc, onTileClicked) => {
   if (loc.x === INVALID_LOC) {
     return null;
   }
-  const top = loc.y * TILE_SZ;
-  const left = loc.x * TILE_SZ;
+  const top = loc.y * TILE_H;
+  const left = 1 + loc.x * TILE_W;
   return <Tile
     type={START}
     cls="bulbasaurTile"
     style={{top, left}}
     row={loc.x}
     col={loc.y}
+    onTileClicked={onTileClicked}
   />;
 };
 
-const Grid = ({grid, startingLoc, onTileClicked}) => {
+const renderFinish = (loc, onTileClicked) => {
+  if (loc.x === INVALID_LOC) {
+    return null;
+  }
+  const top = loc.y * TILE_H;
+  const left = 1 + loc.x * TILE_W;
+  return <Tile
+    type={END}
+    cls="finishTile"
+    style={{top, left}}
+    row={loc.x}
+    col={loc.y}
+    onTileClicked={onTileClicked}
+  />;
+};
+
+const Grid = ({grid, startingLoc, endingLoc, onTileClicked}) => {
   return (
     <div className="gridCtnr">
       <div className="grid">
         {grid.map((row, ix) => renderRow(row, ix, onTileClicked))}
-        {renderBulbasaur(startingLoc)}
+        {renderBulbasaur(startingLoc, onTileClicked)}
+        {renderFinish(endingLoc, onTileClicked)}
       </div>
     </div>
   )

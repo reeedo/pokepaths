@@ -6,7 +6,7 @@ import Commander from './components/Commander';
 import Grid, { gridFromData } from './components/Grid';
 import './App.css';
 
-const { START, FREE } = TILE_TYPES;
+const { START, FREE, BLOCKED, END } = TILE_TYPES;
 
 const defaultPokeData = {
   sideLength: 4,
@@ -50,7 +50,21 @@ class App extends Component {
     })
   };
   onFindPath = () => {
-    alert('Find path');
+    // update pokeData from grid
+    const { pokeData, grid } = this.state;
+    // reset impassables just in case
+    pokeData.impassables = [];
+    for( let i=0; i<grid.length; i++ ) {
+      const row = grid[i];
+      for( let j=0; j<row.length; j++ ) {
+        const tile = row[j];
+        if( tile === BLOCKED ) {
+          pokeData.impassables.push({x: j, y: i});
+        }
+      }
+    }
+    // we should already have start and end
+    console.log(pokeData);
   }
   onTileSelected = (selectedType) => {
     this.setState(prevState => {
@@ -58,38 +72,38 @@ class App extends Component {
     });
   };
   onTileClicked = (loc) => {
-    const { selectedType } = this.state;
+    let { selectedType } = this.state;
     if (selectedType === NO_TILE) {
       // no tile to deposit
       return;
     }
     this.setState(prevState => {
       const { grid } = prevState;
+      const pokeData = { ...prevState.pokeData };
       if (selectedType === START) {
-        // if this is already the start, we've nothing to do
-        if (prevState.pokeData.startingLoc === loc) {
-          return prevState;
-        }
         // set new starting loc
-        const pokeData = { ...prevState.pokeData }
         pokeData.startingLoc = loc;
-
-        // if location is FREE, we're done
-        if (grid[loc.y][loc.x] === FREE) {
-          return { pokeData };
+        // overwrites end if same
+        if (pokeData.endingLoc.x === loc.x && pokeData.endingLoc.y === loc.y) {
+          pokeData.endingLoc = { x: INVALID_LOC, y: INVALID_LOC }
         }
-        // if location is not FREE, need to update it
-        grid[loc.y][loc.x] = FREE;
-        return { pokeData, grid };
+
+        // make sure location is free
+        selectedType = FREE;
+      } else if (selectedType === END) {
+        // set new end loc
+        pokeData.endingLoc = loc;
+        // overwrites start if same
+        if (pokeData.startingLoc.x === loc.x && pokeData.startingLoc.y === loc.y) {
+          pokeData.startingLoc = { x: INVALID_LOC, y: INVALID_LOC }
+        }
+        
+        // make sure location is free
+        selectedType = FREE;
       }
-      // set a normal tile
-      // don't bother if the current location matches
-      if (grid[loc.y][loc.x] === selectedType) {
-        return prevState;
-      }
-      // we're changing it, so we need to update
+      // set the tile
       grid[loc.y][loc.x] = selectedType;
-      return { grid };
+      return { pokeData, grid };
     });
   };
 
@@ -106,6 +120,7 @@ class App extends Component {
         <Grid
           grid={this.state.grid}
           startingLoc={this.state.pokeData.startingLoc}
+          endingLoc={this.state.pokeData.endingLoc}
           onTileClicked={this.onTileClicked}
         />
       </div>

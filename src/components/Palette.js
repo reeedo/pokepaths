@@ -15,13 +15,13 @@ const Palette = ({onTileSelected, selectedType}) => {
   const renderPokeTile = (type, selectedType) => {
     const selClass = selectedType === type ? 'pokeTileCtnr selected' : 'pokeTileCtnr ';
     return (
-      <div className={selClass} key={imageNames[type]} onClick={onSelectTile}>
-      <img
-        src={images[type]}
-        className="pokeTile"
-        type={type}
-        alt={imageNames[type]}
-      />
+      <div className={selClass} key={imageNames[type]} type={type} onClick={onSelectTile}>
+        <img
+          src={images[type]}
+          className="pokeTile"
+          type={type}
+          alt={imageNames[type]}
+        />
       </div>
     );
   };

@@ -3,6 +3,8 @@ import React from 'react';
 import { INVALID_LOC, TILE_TYPES } from '../enums';
 import { images } from '../utils/images';
 
+const { START, END } = TILE_TYPES;
+
 const Tile = ({ type, cls, style, row, col, onTileClicked }) => {
   const onClick = (e) => {
     const r = e.target.getAttribute('row') || INVALID_LOC;
@@ -24,8 +26,8 @@ const Tile = ({ type, cls, style, row, col, onTileClicked }) => {
       col={col}
     />
   );
-  if (type === TILE_TYPES.START) {
-    // when rendering the bulbasaur, we don't wrap it
+  if (type === START || type === END) {
+    // when rendering the bulbasaur or finish tile, we don't wrap it
     // since it is an overlay
     return imgComponent;
   }
