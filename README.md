@@ -1,4 +1,29 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). Documentation cloned from that repository appears at the bottom of tis document.
+
+# POKEDATA
+
+## Installation
+
+Unzip into specified directory. All required node modules are included.
+
+## Operation
+
+A distribution build is available. To run, first `npm install -g serve`. Then you may access the production version at `http://localhost:5000`;
+
+To run in development mode, run `npm start`. This will start the app in development mode. A local host service on port 3000 will open and show the app.
+
+Set the Grid Size by entering a number in the 'Enter Grid Size' box. Hitting enter in the box will reinitiaize the grid with the given size.
+Add elements to the grid by selecting a tile from the palette and then clicking on the grid location where you want this tile to go.
+
+The 'Bulbasaur' tile represents the starting point. The checkered tile is the ending point. There may be only one of each. The green tile represents an open area, the gray one a blocked area. When you have added all your tiles as desired, hit the 'Find Path' button and the path will be retrieved and displayed.
+
+Errors will be displayed in the are between the command entry area and the tile palette.
+
+## Testing
+
+A suite of tests has been included. These are not as thorough as I'd like but do validate a fair amount of the code.
+
+Run tests with the command `npm test`;
 
 ## Available Scripts
 
