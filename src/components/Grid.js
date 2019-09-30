@@ -77,11 +77,55 @@ const renderFinish = (loc, onTileClicked) => {
   />;
 };
 
-const Grid = ({grid, startingLoc, endingLoc, onTileClicked}) => {
+const calcCenter = (loc) => {
+  return {
+    top: loc.y * TILE_H + TILE_H/2,
+    left: 1 + loc.x * TILE_W + TILE_W/2
+  }
+};
+
+const renderMoves = (startingLoc, endingLoc, moves) => {
+  let from = calcCenter(startingLoc);
+  let to = { ...from };
+  const moveElts = moves.map((m, i) => {
+    let cls, style;
+    const key = `m_${i}`;
+    switch (m) {
+      case 'U':
+        to.top -= TILE_H;
+        cls = 'verticalMove';
+        style = { ...to };
+        break;
+      case 'D':
+        to.top += TILE_H;
+        cls = 'verticalMove';
+        style = { ...from };
+        break;
+      case 'L':
+        to.left -= TILE_W;
+        cls = 'horizontalMove';
+        style = { ...to };
+        break;
+      case 'R':
+        to.left += TILE_W;
+        cls = 'horizontalMove';
+        style = { ...from };
+        break;
+      default:
+        break;
+    }
+    from = { ...to };
+    return <div className={cls} style={style} key={key} ></div>;
+  });
+  return moveElts;
+};
+
+const Grid = ({grid, startingLoc, endingLoc, moves, onTileClicked}) => {
   return (
     <div className="gridCtnr">
       <div className="grid">
         {grid.map((row, ix) => renderRow(row, ix, onTileClicked))}
+        {renderMoves(startingLoc, endingLoc, moves)}
         {renderBulbasaur(startingLoc, onTileClicked)}
         {renderFinish(endingLoc, onTileClicked)}
       </div>

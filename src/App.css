@@ -108,6 +108,17 @@ body * {
   height: 32px;
 }
 
+.errorCtnr {
+  min-height: 30px;
+  width: 100%;
+  background-color: #3b5a9e;
+}
+
+.errorMsg {
+  color: pink;
+  text-align: center;
+}
+
 .gridCtnr {
   display: flex;
   flex-direction: row;
@@ -141,4 +152,20 @@ body * {
 .finishTile {
   position: absolute;
 
+}
+
+.verticalMove {
+  position: absolute;
+  width: 1px;
+  height: 32px;
+  border: 1px solid black;
+  background-color: black;
+}
+
+.horizontalMove {
+  position: absolute;
+  height: 1px;
+  width: 32px;
+  border: 1px solid black;
+  background-color: black;
 }
